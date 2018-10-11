@@ -37,9 +37,9 @@
                 <tr v-for="(rank, index) in ranks">
                     <td>{{index + 1}}</td>
                     <td class="team-img-wrap">
-                        <!-- <div class="image-block">
+                        <div class="image-block">
                             <img v-bind:src="imgUrl + rank.id + '.png'" alt="image description">
-                        </div> -->
+                        </div>
                         <p>{{rank.title}}</p>
                     </td>
                     <td>{{rank.TotalPoints}}</td>
@@ -72,7 +72,7 @@
    data (){
      return {
        ranks:null,
-       imgUrl:'/assets/images/',
+       imgUrl:'http://www.kingbet.net/media/app/teamlogos/',
        LIcontent:null
      }
    },
