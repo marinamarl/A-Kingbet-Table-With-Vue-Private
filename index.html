@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+<script src="https://unpkg.com/vue@2.4.2"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<div id="app" class="table-leaderboard-section d-none d-md-block">
+    <div class="title-holder">
+        <h2><i class="icon icon-cup"></i> Βαθμολογία</h2>
+        <ul class="nav nav-pills table-filter">
+            <li data-tab="synolo">
+                <a href="#" class="nav-link active" data-toggle="pill">Σύνολο</a>
+            </li>
+            <li data-tab="edos">
+                <a href="#" class="nav-link" data-toggle="pill">Eντός</a>
+            </li>
+            <li data-tab="ektos">
+                <a href="#" class="nav-link" data-toggle="pill">Eκτός</a>
+            </li>
+        </ul>
+    </div>
+    <div class="table-responsive">
+        <table class="table-leaderboard">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th>B</th>
+                    <th>Α</th>
+                    <th>Ν</th>
+                    <th>Ι</th>
+                    <th>Η</th>
+                    <th>Γ</th>
+                    <th>ΦΟΡΜΑ & UNDER/OVER</th>
+                </tr>
+            </thead>
+            <tbody class="Vathmologia current" id="synolo">
+                <tr v-for="(rank, index) in ranks">
+                    <td>{{index + 1}}</td>
+                    <td class="team-img-wrap">
+                        <!-- <div class="image-block">
+                            <img v-bind:src="imgUrl + rank.id + '.png'" alt="image description">
+                        </div> -->
+                        <p>{{rank.title}}</p>
+                    </td>
+                    <td>{{rank.TotalPoints}}</td>
+                    <td>{{rank.total}}</td>
+                    <td>{{rank.Nikes}}</td>
+                    <td>{{rank.Isop}}</td>
+                    <td>{{rank.Httes}}</td>
+                    <td v-bind:calc-goals="calcGoals" >{{calcGoals(rank)}}</td>
+                    <td>
+                      <ul class="tags-list">
+<!-- separate classes done, need greek letters though! -->
+                        <li v-for="points in rank.lastsix_total.team.sixlast" v-if="points.point==='W'" class="win">N</li>
+                        <li  v-else-if="points.point==='L'" class="loose">H</li>
+                        <li  v-else="points.point==='I'" class="warning">I</li>
+                        </ul>
+                    </td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+          </div>
+  <script>
+  let cases = {
+    win: '<li>N</li>',
+    tie: '<li class="warning">I</li>',
+    loss:'<li class="loose">H</li>'
+  }
+  let vm = new Vue({
+   el:'#app',
+   data (){
+     return {
+       ranks:null,
+       imgUrl:'/assets/images/',
+       LIcontent:null
+     }
+   },
+   components: {
+     cases
+   },
+   mounted () {
+     axios
+     .get('http://cdn.wedia.gr/remote-xml/secs/new/getSingleGameStats.php?id=352076')
+     .then(response => (this.ranks = response.data.ranking))
+     .catch(error => console.log(error))
+   },
+   methods:{
+     calcGoals(ranks){
+      return  Number(ranks.Gplus) + Number(ranks.Gminus);
+    },
+    
+  //   gameOutcome(){
+  //     let matchOutcome = $('.tags-list li').text;
+  //     if (matchOutcome == "W"){
+  //       this.$('.tags-list li').addClass('win');
+  //       console.log('win');
+  //     }else if(matchOutcome == "I"){
+  //       this.$('.tags-list li').addClass('warning');
+  //       console.log('tie');
+  //     }else{
+  //       this.$('.tags-list li').addClass('loose');
+  //       console.log('loss');
+  //     }
+  // }
+
+      // switch (rank) {
+      //   case "W":
+      //   console.log('win');
+      //     this.LIcontent = cases.win;
+      //     break;
+      //   case "I":
+      //     console.log('tie');
+      //     this.LIcontent = cases.tie;
+      //     break;
+      //   case"L":
+      //     console.log('loss');
+      //     this.LIcontent = cases.loss;
+      //     break;
+      //   default:
+      //   break;
+      // }
+    
+   }
+
+ });
+ 
+  </script>
+
+<style> @import "assets/table.css"; </style>
