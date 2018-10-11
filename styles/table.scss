@@ -816,15 +816,15 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            width: 36px;
-            height: 36px;
+            width: 55px;
+            height: 55px;
             border-radius: 50%;
             background: #fff;
             position: relative;
             margin: 0 17px;
 
             img {
-                max-width: 26px;
+                max-width: 80%;
             }
         }
         .image-block-left{
@@ -1075,7 +1075,7 @@
         }
 
         td {
-            font-size: 15px;
+            font-size: 17px;
             font-weight: 300;
             color: #565656;
             padding: 0px 5px;
@@ -1094,8 +1094,8 @@
             }
 
             .image-block {
-                width: 36px;
-                height: 36px;
+              width: 55px;
+              height: 60px;
                 border-radius: 50%;
                 background: white;
                 display: inline-block;
@@ -1104,7 +1104,8 @@
                 padding-top: 5px;
 
                 img {
-                    max-width: 26px;
+                    max-width: 65%;
+                    margin: 10px;
                 }
             }
             p{margin: auto;}
