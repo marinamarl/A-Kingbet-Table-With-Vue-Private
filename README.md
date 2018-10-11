@@ -1,7 +1,7 @@
-download repo.
+git clone git@gitlab.com:MarinaMarl/a-kingbet-table-with-vue.git
 
-1) composer install 
+1) Composer install 
 
-2) gulp
+2) Gulp
 
-3) navigate to localhost:8080
+3) Navigate to localhost:8080
